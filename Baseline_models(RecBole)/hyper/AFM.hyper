@@ -1,3 +1,0 @@
-learning_rate choice [0.01]
-attention_size choice [10,20,40]
-reg_weight choice [0,0.2,5]
