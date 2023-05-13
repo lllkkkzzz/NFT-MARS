@@ -14,7 +14,7 @@ This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-mod
 
 ## Get started
 
-### Our model
+### "Our model"
 
 1. Install Python 3.10.9
 
@@ -55,7 +55,7 @@ This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-mod
 
 Our repository includes two additional folders: "**Baseline models (MGAT)**" and "**Baseline models (Others)**". All models except for MGAT were implemented using RecBole, so they are separated into their own folder.
 
-### **Baseline models (MGAT)**
+### **"Baseline models (MGAT)"**
 
 contains the code to implement the MGAT model.
 
@@ -65,7 +65,7 @@ You can follow the steps in the "Get started" section above, but note that the e
 bash run_MGAT.sh
 ```
 
-### **Baseline models (Others)**
+### **"Baseline models (Others)"**
 
 contains code to implement other models including Pop, ItemKNN, BPR, DMF, LightGCN, FM, DeepFM, WideDeep, DCN, and AutoInt. 
 
@@ -81,4 +81,16 @@ We appreciate the following github repos a lot for their valuable code base or d
 
 1. [RecBole](https://github.com/RUCAIBox/RecBole)
 2. [MGAT](https://github.com/zltao/MGAT)
+
+
+
+
+
+
+
+
+
+
+
+
 
