@@ -33,7 +33,9 @@ This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-mod
    ~~~
 
 6. *(Ablation studies)* Train the model using a single graph. 
+
    In this case, since the multi-modal attention used in the existing NFT-MARS model cannot be applied, the model name has been changed to "MO", which stands for Multi Objective. For example, "MO_v" is a single graph model that utilizes visual features. 
+
    We provide the experiment scripts of all datasets in the file `run_MO.sh`. You can reproduce the experiment results by:
 
    ```bash
