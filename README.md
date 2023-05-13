@@ -25,6 +25,7 @@ This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-mod
 4. Download requirement packages ***pip install -r requirements.txt***
 
 5. Train the model. 
+
    We provide the experiment scripts of all datasets in the file `run.sh`. You can reproduce the experiment results by: 
 
    ~~~bash
