@@ -1,6 +1,8 @@
 # RecSys2023
 
-This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-modal multi-Attention Recommender System for NFTs**	
+This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-modal multi-Attention Recommender System for NFTs**. 
+
+All experiments were repeated three times, which can be replicated with three different random seeds (2022, 2023, 2024).
 
 
 
@@ -53,7 +55,7 @@ This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-mod
 
 ## Baselines
 
-Our repository includes two additional folders: "**Baseline models (MGAT)**" and "**Baseline models (Others)**". All models except for MGAT were implemented using RecBole, so they are separated into their own folder.
+Our repository includes two additional folders: "**Baseline models (MGAT)**" and "**Baseline models (Others)**". All baselines except for MGAT were implemented using RecBole, so they are separated into their own folder.
 
 ### **"Baseline models (MGAT)"**
 
@@ -81,16 +83,3 @@ We appreciate the following github repos a lot for their valuable code base or d
 
 1. [RecBole](https://github.com/RUCAIBox/RecBole)
 2. [MGAT](https://github.com/zltao/MGAT)
-
-
-
-
-
-
-
-
-
-
-
-
-
