@@ -15,7 +15,7 @@ All experiments were repeated three times, which can be replicated with three di
 
 ## Get started
 
-### "Our model"
+### **`Our model`**
 
 1. Install Python 3.10.9
 
@@ -56,7 +56,7 @@ All experiments were repeated three times, which can be replicated with three di
 
 Our repository includes two additional folders: "**Baseline models (MGAT)**" and "**Baseline models (Others)**". All baselines except for MGAT were implemented using RecBole, so they are separated into their own folder.
 
-### **"Baseline models (MGAT)"**
+### **`Baseline models (MGAT)`**
 
 contains the code to implement the MGAT model.
 
@@ -66,7 +66,7 @@ You can follow the steps in the "Get started" section above, but note that the e
 bash run_MGAT.sh
 ```
 
-### **"Baseline models (Others)"**
+### **`Baseline models (Others)`**
 
 contains code to implement other models including Pop, ItemKNN, BPR, DMF, LightGCN, FM, DeepFM, WideDeep, DCN, and AutoInt. 
 
