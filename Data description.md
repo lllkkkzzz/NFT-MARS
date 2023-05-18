@@ -49,7 +49,7 @@
 # 2. Item features preparation
 
 ## 2.1. Image
-We employ Convolutional Auto-Encoder(CAE) to derive representations from the NFT images. We standardise all images to a shape of 128*128*3, where 3 represents the RGB colour spectrum. CAE model consists of an encoder and a decoder, both comprising of eight fully connected alyers, The encoder utilises a 33 convolutional kernel and 22 max pooling, while the decode employs a 33 convolutional kernel along with 22 upsampling.
+We employ Convolutional Auto-Encoder(CAE) to get representations from the NFT images. We standardise all images to a shape of 128*128*3, where 3 represents the RGB colour spectrum. CAE model consists of an encoder and a decoder, both comprising of eight fully connected alyers, The encoder utilises a 33 convolutional kernel and 22 max pooling, while the decode employs a 33 convolutional kernel along with 22 upsampling.
 All non-linear functions in the model are implemented using the ReLU activation function. The model is trained for 100 epochs, with the objective of minimising the Mean Squared Error (MSE) loss. The final image embeddings are obtained by employing only the encoder of the CAE, which reduces the data down to 8*8*1 size. After flattening the output, we receive a 64-dimension representation for each image. This refined data is them ready for subsequent modeling stages.
 
 ## 2.2. Text
