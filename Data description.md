@@ -1,34 +1,50 @@
-# 1. Data Sparsity
+# 1. Data Description
 
-## 1.1. Bored Apes Yacht Club 
-### 1.1.1. transaction sparsity after user/item cut
+## 1.1. Overview
 
-### 1.1.2. number of items left after cut
-
-### 1.1.3. number of users left after cut
-
-## 1.2. Cool cats
-### 1.2.1. transaction sparsity after user/item cut
-
-### 1.2.2. number of items after cut
-
-### 1.2.3. number of users after cut
+number of users, items and interactions for each collection
+|       | user | item | interaction |
+| BAYC  | 1230 | 6726 | 13737 |
+| Coolcats | 1357 | 6824 | 14890 |
+| Doodles | 804 | 4771 | 7250 |
+| Meebits | 1184 | 6693 | 21104 |
 
 
-## 1.3. Doodles
-### 1.3.1. transaction sparsity after user/item cut
 
-### 1.3.2. number of items after cut
+## 1.2. Data Sparsity
+### 1.2.1. Bored Apes Yacht Club 
 
-### 1.3.3. number of users after cut
+transaction sparsity after user/item cut
+
+number of items left after cut
+
+number of users left after cut
+
+### 1.2.2. Cool cats
+
+transaction sparsity after user/item cut
+
+number of items after cut
+
+number of users after cut
 
 
-## 1.4. Meebits
-### 1.4.1. transaction sparsity after user/item cut
+### 1.2.3. Doodles
 
-### 1.4.2. number of items after cut
+transaction sparsity after user/item cut
 
-### 1.4.3. number of users after cut
+number of items after cut
+
+number of users after cut
+
+
+### 1.2.4. Meebits
+
+transaction sparsity after user/item cut
+
+number of items after cut
+
+number of users after cut
 
 
 # 2. Graph connectivity
