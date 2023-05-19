@@ -4,6 +4,7 @@
 
 number of users, items and interactions for each collection
 |       | user | item | interaction |
+|-------|------|------|-------------|
 | BAYC  | 1230 | 6726 | 13737 |
 | Coolcats | 1357 | 6824 | 14890 |
 | Doodles | 804 | 4771 | 7250 |
