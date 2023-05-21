@@ -19,19 +19,19 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 1. Number of transaction left after transaction threshold on users
 
-![alt text](assets/user_trxns.png)
+![Plot](assets/user_trxns.png){ width=400 height=300 }
 
 2. Number of transaction left after transaction threshold on items
 
-![alt text](assets/item_trxns.png)
+![Plot](assets/item_trxns.png){ width=400 height=300 }
 
 3. Number of users left after user threshold
 
-![alt text](assets/user_num.png)
+![Plot](assets/user_num.png){ width=400 height=300 }
 
 4. Number of items left after item threshold
 
-![alt text](assets/item_num.png)
+![Plot](assets/item_num.png){ width=400 height=300 }
 
 
 
