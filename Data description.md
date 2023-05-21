@@ -65,6 +65,7 @@ We explore our dataset by evaluating its data density and transaction thresholds
 - Meebits<br>
 
 <br>
+
 # 3. Token price movement analysis
 in order to use price movement label(binary; 1 if upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination on the price movement of each tokens. 
 1. Number of tokens for which lastest transaction price is greater than the initial transaction price (add a table)
@@ -74,18 +75,18 @@ in order to use price movement label(binary; 1 if upward movement, 0 for downwar
 
 # 4. Item features preparation (이건 좀 겉도는 감이 있음 따로 빼던지 아님 놔두던지)
 
-## 4.1. Image
+## Image
 We employ Convolutional Auto-Encoder(CAE) to get representations from the NFT images. We standardise all images to a shape of `128 * 128 * 3`, where 3 represents the RGB colour spectrum. CAE model consists of an encoder and a decoder, both comprising of eight fully connected alyers, The encoder utilises a 33 convolutional kernel and 22 max pooling, while the decode employs a 33 convolutional kernel along with 22 upsampling.
 All non-linear functions in the model are implemented using the ReLU activation function. The model is trained for 100 epochs, with the objective of minimising the Mean Squared Error (MSE) loss. The final image embeddings are obtained by employing only the encoder of the CAE, which reduces the data down to `8 * 8 * 1`
  size. After flattening the output, we receive a 64-dimension representation for each image. This refined data is them ready for subsequent modeling stages.<br>
 <br>
-## 4.2. Text
+## Text
 The text data for each item is comprised of discrete words each describing each of the visual properties like ‘Background colour’, ‘body’, ‘outfit’, and ‘hair’. Items within the same collection share the same types of visual properties whereas they tend to vary across collections. Cool cats, for example, is a collection of blue cat avatars with each artwork possessing a unique body, hat, face, and outfit, whereas Bored Ape Yacht Club is a collection of monkey avatars having a slightly different types of properties like ‘fur’. Among all, we only have considered six types of properties with the fewest missing values for each collection apart from Cool cats, for which we considered all available 5 types of properties for generating item embeddings. We then processed each descriptive word into a 300-dimension word embedding. This was done by fetching the corresponding embeddings from a pre-trained Word2Vec model. If a particular word was not found in this model, we filled it with zero padding. It's worth noting that while a majority of visual attributes were described by a single word, those composed of multiplie words, like 'short red hair' for 'Hair', we used the sum of each word's embeddings instead. Each word embedding was concatenated with other embeddings related to the same item. As a result, each item's word embedding size ranged from 1500 to 1800, depending on the number of visual traits considered.<br>
 <br>
-## 4.3. Price
+## Price
 
 
-## 4.4. Transaction
+## Transaction
 
 
 
