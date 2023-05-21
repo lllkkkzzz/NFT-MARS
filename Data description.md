@@ -1,6 +1,6 @@
 # 1. Data Description
 
-## Overview
+## 1.1. Overview
 
 The number of users, items and interactions for each collection used for the experiment.<br>
 | collection | users | items | interactions |
@@ -16,7 +16,7 @@ The number of users, items and interactions for each collection used for the exp
 
 
 
-## Evaluating Data Density and Transaction Thresholds
+## 1.2. Evaluating Data Density and Transaction Thresholds
 
 We explore our dataset by evaluating its data density and transaction thresholds as determining the optimal transaction threshold is one of the critical steps in designing effective recommender systems. Below analyses were done with complete set of transactions.<br>
 
@@ -44,14 +44,30 @@ We explore our dataset by evaluating its data density and transaction thresholds
 2. Number of transaction left after transaction threshold on items
 <img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;"> -->
 
+<div class="image-container">
+    <p>2. Number of transaction left after transaction threshold on items</p>
+    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+    
+</div><br>
+<br>
+<!-- 3. Number of users left after user threshold
+<img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;"> -->
 
-3. Number of users left after user threshold
-<img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+<div class="image-container">
+    <p>3. Number of users left after user threshold</p>
+    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+    
+</div><br>
+<br>
 
-
-4. Number of items left after item threshold
+<div class="image-container">
+    <p>4. Number of items left after item threshold</p>
+    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+</div><br>
+<br>   
+<!-- 4. Number of items left after item threshold
 <img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
-
+ -->
 
 
 
