@@ -16,37 +16,30 @@ The number of users, items and interactions for each collection used for the exp
 We explore our dataset by evaluating its data density and transaction thresholds as determining the optimal transaction threshold is one of the critical steps in designing effective recommender systems. Below analyses were done with complete set of transactions.<br>
 
 <br>
+
+- Number of transaction left after transaction threshold on users
 <div class="image-container">
-    <ul>
-        <li><strong>Number of transaction left after transaction threshold on users</li>
-    </ul>
     <img src="assets/user_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
+- Number of transactions left after transaction threshold on items
 <div class="image-container">
-     <ul>
-        <li><strong>Number of transactions left after transaction threshold on items</li>
-    </ul>
     <img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
+- Number of users left after user threshold
 <div class="image-container">
-     <ul>
-        <li><strong>Number of users left after user threshold</li>
-    </ul>
     <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
+- Number of items left after item threshold
 <div class="image-container">
-    <ul>
-        <li><strong>Number of items left after item threshold</li>
-    </ul>
     <img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
 </div><br>
 <br>   
