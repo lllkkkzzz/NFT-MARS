@@ -67,14 +67,23 @@ We explore our dataset by evaluating its data density and transaction thresholds
 <br>
 
 # 3. Token price movement analysis
-in order to use price movement label(binary; 1 if upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination on the price movement of each tokens. 
-1. Number of tokens for which lastest transaction price is greater than the initial transaction price (add a table)
-2. Number of tokens for which latest transaction price is greater than the mean of the rest of the transactions' price (add a table)
-3. Number of tokens for which mean of the second half transactions' price is greater than the first half transactions' price (add a table)<br>
+In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices.<br>
+
+| Token      | Latest Trxn Price > First Price | Latest Trxn Price > Avg. Price (Excluding Last) | Avg. Price (First Half) < Avg. Price (Last Half) |
+|------------|-------------------------------|--------------|--------------|
+| Azuki      | 41%                         | 32%         | 41% |
+| BAYC       | 59%                         | 61%       | 59% |
+| Cool Cats  | 47%                         | 47%         | 50% |
+| Doodles    | 58%                          | 48%        | 59% |
+| Meebits    | 45%                          | 45%         |47% |
+
+<br>
+In the table, each row represents a specific token, and the values indicate the percentage of tokens that exhibit the respective price movements.
+
+This analysis provides insights into the price movements of each token, enabling the utilization of price movement labels for multi-task learning purposes.<br>
 <br>
 
 # 4. Item features preparation (이건 좀 겉도는 감이 있음 따로 빼던지 아님 놔두던지)
-
 ## Image
 We employ Convolutional Auto-Encoder(CAE) to get representations from the NFT images. We standardise all images to a shape of `128 * 128 * 3`, where 3 represents the RGB colour spectrum. CAE model consists of an encoder and a decoder, both comprising of eight fully connected alyers, The encoder utilises a 33 convolutional kernel and 22 max pooling, while the decode employs a 33 convolutional kernel along with 22 upsampling.
 All non-linear functions in the model are implemented using the ReLU activation function. The model is trained for 100 epochs, with the objective of minimising the Mean Squared Error (MSE) loss. The final image embeddings are obtained by employing only the encoder of the CAE, which reduces the data down to `8 * 8 * 1`
