@@ -68,7 +68,7 @@ th {
     font-size: 6px; /* Adjust the font size as needed */
 }
 </style>
-| Token      | Latest Trxn Price > First Price | Latest Trxn Price > Avg. Price (Excluding Last) | Avg. Price (First Half) < Avg. Price (Last Half) |
+| Token      | <span style="font-size: 12px;">Latest Trxn Price > First Price</span> | Latest Trxn Price > <span style="font-size: 12px;">Avg. Price (Excluding Last)</span> | <span style="font-size: 12px;">Avg. Price (First Half) < Avg. Price (Last Half)</span> |
 |------------|-------------------------------|--------------|--------------|
 | BAYC       | 59%                         | 61%       | 59% |
 | Cool Cats  | 47%                         | 47%         | 50% |
