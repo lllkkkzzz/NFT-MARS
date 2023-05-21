@@ -2,8 +2,8 @@
 
 ## 1.1. Overview
 
-number of users, items and interactions for each collection
-|       | users | items | interactions |
+number of users, items and interactions for each collection used for the experiment.
+| collection | users | items | interactions |
 |-------|------|------|-------------|
 | BAYC  | 1230 | 6726 | 13737 |
 | Coolcats | 1357 | 6824 | 14890 |
@@ -13,39 +13,16 @@ number of users, items and interactions for each collection
 
 
 ## 1.2. Data Sparsity
-### 1.2.1. Bored Apes Yacht Club 
 
-transaction sparsity after user/item cut
+All sparsity checks were done with complete set of transactions.
 
-number of items left after cut
-
-number of users left after cut
-
-### 1.2.2. Cool cats
-
-transaction sparsity after user/item cut
-
-number of items after cut
-
-number of users after cut
+### 1.2.1. transaction sparsity after user/item cut
 
 
-### 1.2.3. Doodles
+### 1.2.2. number of items left after item threshold
 
-transaction sparsity after user/item cut
+### 1.2.3. number of users left after user threshold
 
-number of items after cut
-
-number of users after cut
-
-
-### 1.2.4. Meebits
-
-transaction sparsity after user/item cut
-
-number of items after cut
-
-number of users after cut
 
 
 # 2. Graph connectivity
@@ -73,6 +50,7 @@ All non-linear functions in the model are implemented using the ReLU activation 
 The text data for each item is comprised of discrete words each describing each of the visual properties like ‘Background colour’, ‘body’, ‘outfit’, and ‘hair’. Items within the same collection share the same types of visual properties whereas they tend to vary across collections. Cool cats, for example, is a collection of blue cat avatars with each artwork possessing a unique body, hat, face, and outfit, whereas Bored Ape Yacht Club is a collection of monkey avatars having a slightly different types of properties like ‘fur’. Among all, we only have considered six types of properties with the fewest missing values for each collection apart from Cool cats, for which we considered all available 5 types of properties for generating item embeddings. We then processed each descriptive word into a 300-dimension word embedding. This was done by fetching the corresponding embeddings from a pre-trained Word2Vec model. If a particular word was not found in this model, we filled it with zero padding. It's worth noting that while a majority of visual attributes were described by a single word, those composed of multiplie words, like 'short red hair' for 'Hair', we used the sum of each word's embeddings instead. Each word embedding was concatenated with other embeddings related to the same item. As a result, each item's word embedding size ranged from 1500 to 1800, depending on the number of visual traits considered.
 
 ## 2.3. Price
+
 
 ## 2.4. Transaction
 
