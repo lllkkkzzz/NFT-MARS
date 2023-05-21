@@ -45,7 +45,7 @@ We explore our dataset by evaluating its data density and transaction thresholds
 <br>   
 
 ## 1.3. Power law distribution<br>
-By examining power law distributions, we gain insights into the relative popularity and concentration of tokens within the dataset. Therefore, we conduct an analysis of the power law distribution within our dataset and compare it with benchmark data. This comparison allows us to assess how our dataset aligns with established benchmarks and understand any deviations or unique characteristics present. 
+By examining power law distributions, we gain insights into the relative popularity and concentration of tokens within the dataset. Therefore, we conduct an analysis of the power law distribution within our dataset and compare it with benchmark data. This comparison allows us to assess how our dataset aligns with established benchmarks and understand any deviations or unique characteristics present.<br>
 <br>
 - Bored Apes Yacht Club <br>
 
@@ -64,7 +64,7 @@ By examining power law distributions, we gain insights into the relative popular
 
 In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices. In the table, each row represents a specific token, and the values indicate the percentage of tokens that exhibit the respective price movements.<br>
 
-
+<br>
 | Token      | Latest Price > First Price | Latest Price >Avg. Price (Excluding Last) | Avg. Price (First Half) < Avg. Price (Last Half) |
 |------------|-------------------------------|--------------|--------------|
 | BAYC       | 59%                         | 61%       | 59% |
