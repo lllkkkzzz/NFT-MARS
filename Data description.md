@@ -24,21 +24,21 @@ We explore our dataset by evaluating its data density and transaction thresholds
 </div><br>
 <br>
 
-- Number of transactions left after transaction threshold on items
+- **Number of transactions left after transaction threshold on items**
 <div class="image-container">
     <img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
-- Number of users left after user threshold
+- **Number of users left after user threshold**
 <div class="image-container">
     <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
-- Number of items left after item threshold
+- **Number of items left after item threshold**
 <div class="image-container">
     <img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
 </div><br>
