@@ -2,7 +2,7 @@
 
 ## 1.1. Overview
 
-number of users, items and interactions for each collection used for the experiment.
+The number of users, items and interactions for each collection used for the experiment.
 | collection | users | items | interactions |
 |-------|------|------|-------------|
 | BAYC  | 1230 | 6726 | 13737 |
@@ -12,9 +12,9 @@ number of users, items and interactions for each collection used for the experim
 
 
 
-## 1.2. Data Sparsity
+## 1.2. Evaluating Data Density and Transaction Thresholds
 
-All sparsity checks were done with complete set of transactions.
+We explore our dataset by evaluating its data density and transaction thresholds as determining the optimal transaction threshold is one of the critical steps in designing effective recommender systems. Below analyses were done with complete set of transactions.
 
 
 - **Number of transaction left after transaction threshold on users**
