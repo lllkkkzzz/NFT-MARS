@@ -17,7 +17,7 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 <br>
 
-- Number of transaction left after transaction threshold on users
+- **Number of transaction left after transaction threshold on users**
 <div class="image-container">
     <img src="assets/user_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
