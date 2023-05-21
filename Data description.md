@@ -44,8 +44,9 @@ We explore our dataset by evaluating its data density and transaction thresholds
 </div><br>
 <br>   
 
-## 1.3. Power law distribution<br>
-By examining power law distributions, we gain insights into the relative popularity and concentration of tokens within the dataset. Therefore, we conduct an analysis of the power law distribution within our dataset and compare it with benchmark data. This comparison allows us to assess how our dataset aligns with established benchmarks and understand any deviations or unique characteristics present.<br>
+## 1.3. Power law distribution (coefficient 추가할 것)
+
+By examining power law distributions, we gain insights into the relative popularity and concentration of tokens within the dataset. Therefore, we conduct an analysis of the power law distribution within our dataset and compare it with benchmark data. This comparison allows us to assess how our dataset aligns with established benchmarks and understand any deviations or unique characteristics present. For the benchmark dataset, we have randomly selected 36000 interactions to match the number of interactions with our data and provided a fair comparison. <br>
 <br>
 1. Our dataset
 - Bored Apes Yacht Club <br>
@@ -75,7 +76,11 @@ By examining power law distributions, we gain insights into the relative popular
 <img src="assets/movielens20m.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 
-## 1.4. Token price movement<br>
+The distribution for our datasets shows a weaker power law distribution compared to a benchmark dataset, suggesting that the popularity of items in our dataset is more evenly distributed. This could potentially make the task of recommendation more challenging just relying on the collaborative filtering method, as popularity (which is a simple and effective signal for recommendation) is less informative in our dataset.<br>
+<br>
+
+## 1.4. Token price movement
+
 In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices. In the table, each row represents a specific token, and the values indicate the percentage of tokens that exhibit the respective price movements.<br>
 
 <br>
@@ -91,6 +96,7 @@ In order to incorporate price movement labels (binary: 1 for upward movement, 0 
 <br>
 
 # 2. Item features preparation (이건 좀 겉도는 감이 있음 따로 빼던지 아님 놔두던지)
+
 ## Image
 We employ Convolutional Auto-Encoder(CAE) to get representations from the NFT images. We standardise all images to a shape of `128 * 128 * 3`, where 3 represents the RGB colour spectrum. CAE model consists of an encoder and a decoder, both comprising of eight fully connected alyers, The encoder utilises a 33 convolutional kernel and 22 max pooling, while the decode employs a 33 convolutional kernel along with 22 upsampling.
 All non-linear functions in the model are implemented using the ReLU activation function. The model is trained for 100 epochs, with the objective of minimising the Mean Squared Error (MSE) loss. The final image embeddings are obtained by employing only the encoder of the CAE, which reduces the data down to `8 * 8 * 1`
