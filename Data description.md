@@ -17,7 +17,9 @@ number of users, items and interactions for each collection used for the experim
 All sparsity checks were done with complete set of transactions.
 
 ### 1.2.1. transaction sparsity after user/item cut
+![alt text](assets/user_trxns_sparsity.png)
 
+![alt text](assets/item_trxns_sparsity.png)
 
 ### 1.2.2. number of items left after item threshold
 
