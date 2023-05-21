@@ -24,24 +24,24 @@ We explore our dataset by evaluating its data density and transaction thresholds
     <p>1. Number of transaction left after transaction threshold on users</p>
     <img src="assets/user_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
-</div>
+</div><br>
+<br>
 
-<div class="section-space"></div>
-<style>
-.section-space {
-    margin-bottom: 2em; /* Adjust the margin value as desired */
-}
-</style>
 
 <!-- 1. Number of transaction left after transaction threshold on users
 <img src="assets/user_trxns.png" alt="Plot" style="width:500px;height:300px;"> -->
 
 
+<div class="image-container">
+    <p>2. Number of transaction left after transaction threshold on items</p>
+    <img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;">
+    
+</div><br>
+<br>
 
-
-
+<!-- 
 2. Number of transaction left after transaction threshold on items
-<img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;">
+<img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;"> -->
 
 
 3. Number of users left after user threshold
