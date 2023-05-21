@@ -30,8 +30,7 @@ We explore our dataset by evaluating its data density and transaction thresholds
 ![Plot](assets/user_num.png){ width=400 height=300 }
 
 4. Number of items left after item threshold
-
-![Plot](assets/item_num.png){ width=400 height=300 }
+<img src="assets/item_num.png" alt="Plot" style="width:400px;height:300px;">
 
 
 
