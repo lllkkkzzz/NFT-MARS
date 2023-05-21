@@ -63,13 +63,46 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices.<br>
 
-
+<!-- 
 | Token      | <span style="font-size: 5px;">Latest Trxn Price > First Price</span> | Latest Trxn Price > <span style="font-size: 5px;">Avg. Price (Excluding Last)</span> | <span style="font-size: 5px;">Avg. Price (First Half) < Avg. Price (Last Half)</span> |
 |------------|-------------------------------|--------------|--------------|
 | BAYC       | 59%                         | 61%       | 59% |
 | Cool Cats  | 47%                         | 47%         | 50% |
 | Doodles    | 58%                          | 48%        | 59% |
-| Meebits    | 45%                          | 45%         |47% |
+| Meebits    | 45%                          | 45%         |47% | -->
+
+<table>
+  <tr>
+    <th style="font-size: 10px;">Token</th>
+    <th style="font-size: 10px;">Latest Trxn Price > First Price</th>
+    <th style="font-size: 10px;">Latest Trxn Price > Avg. Price (Excluding Last)</th>
+    <th style="font-size: 10px;">Avg. Price (First Half) &lt; Avg. Price (Last Half)</th>
+  </tr>
+  <tr>
+    <td>BAYC</td>
+    <td>59%</td>
+    <td>61%</td>
+    <td>59%</td>
+  </tr>
+  <tr>
+    <td>Cool Cats</td>
+    <td>47%</td>
+    <td>47%</td>
+    <td>50%</td>
+  </tr>
+  <tr>
+    <td>Doodles</td>
+    <td>58%</td>
+    <td>48%</td>
+    <td>59%</td>
+  </tr>
+  <tr>
+    <td>Meebits</td>
+    <td>45%</td>
+    <td>45%</td>
+    <td>47%</td>
+  </tr>
+</table>
 
 
 
