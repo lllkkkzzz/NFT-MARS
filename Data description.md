@@ -17,19 +17,19 @@ number of users, items and interactions for each collection used for the experim
 All sparsity checks were done with complete set of transactions.
 
 
-**- Number of transaction left after transaction threshold on users**
+- **Number of transaction left after transaction threshold on users**
 
 ![alt text](assets/user_trxns.png)
 
-**- Number of transaction left after transaction threshold on items**
+- **Number of transaction left after transaction threshold on items**
 
 ![alt text](assets/item_trxns.png)
 
-**- Number of users left after user threshold**
+- **Number of users left after user threshold**
 
 ![alt text](assets/user_num.png)
 
-**- Number of items left after item threshold**
+- **Number of items left after item threshold**
 
 ![alt text](assets/item_num.png)
 
