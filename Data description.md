@@ -28,30 +28,12 @@ We explore our dataset by evaluating its data density and transaction thresholds
 </div><br>
 <br>
 
-
-<!-- 1. Number of transaction left after transaction threshold on users
-<img src="assets/user_trxns.png" alt="Plot" style="width:500px;height:300px;"> -->
-
-
 <div class="image-container">
     <p>2. Number of transaction left after transaction threshold on items</p>
     <img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
-
-<!-- 
-2. Number of transaction left after transaction threshold on items
-<img src="assets/item_trxns.png" alt="Plot" style="width:500px;height:300px;"> -->
-
-<div class="image-container">
-    <p>2. Number of transaction left after transaction threshold on items</p>
-    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
-    
-</div><br>
-<br>
-<!-- 3. Number of users left after user threshold
-<img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;"> -->
 
 <div class="image-container">
     <p>3. Number of users left after user threshold</p>
@@ -62,12 +44,10 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 <div class="image-container">
     <p>4. Number of items left after item threshold</p>
-    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+    <img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
 </div><br>
 <br>   
-<!-- 4. Number of items left after item threshold
-<img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
- -->
+
 
 
 
