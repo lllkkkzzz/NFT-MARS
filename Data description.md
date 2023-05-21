@@ -67,11 +67,11 @@ We explore our dataset by evaluating its data density and transaction thresholds
 <br>
 
 # 3. Token price movement analysis
+
 In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices.<br>
 
 | Token      | Latest Trxn Price > First Price | Latest Trxn Price > Avg. Price (Excluding Last) | Avg. Price (First Half) < Avg. Price (Last Half) |
 |------------|-------------------------------|--------------|--------------|
-| Azuki      | 41%                         | 32%         | 41% |
 | BAYC       | 59%                         | 61%       | 59% |
 | Cool Cats  | 47%                         | 47%         | 50% |
 | Doodles    | 58%                          | 48%        | 59% |
