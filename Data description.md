@@ -49,23 +49,23 @@ By examining power law distributions, we gain insights into the relative popular
 <br>
 1. Our dataset
 - Bored Apes Yacht Club <br>
-
+ <img src="assets/bayc.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 - Cool cats<br>
-
+<img src="assets/coolcats.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 - Doodles<br>
-
+<img src="assets/doodles.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 - Meebits<br>
-
+<img src="assets/meebits.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 2. Benchmark datasets
 - Amazon<br>
-
+<img src="assets/amazon.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 - MovieLens20M<br>
-
+<img src="assets/movielens20m.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 
 ## 1.4. Token price movement<br>
