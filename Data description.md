@@ -72,6 +72,7 @@ In order to incorporate price movement labels (binary: 1 for upward movement, 0 
 | Meebits    | 45%                          | 45%         |47% |
 
 
+
 <br>
 In the table, each row represents a specific token, and the values indicate the percentage of tokens that exhibit the respective price movements.<br>
 <br>
