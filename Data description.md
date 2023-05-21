@@ -44,7 +44,7 @@ We explore our dataset by evaluating its data density and transaction thresholds
 </div><br>
 <br>   
 
-## 1.3. Power law distribution (coefficient 추가할 것)
+## 1.3. Power law distribution (coefficient 추가할 것, 배열 다시 정리하기)
 
 By examining power law distributions, we gain insights into the relative popularity and concentration of tokens within the dataset. Therefore, we conduct an analysis of the power law distribution within our dataset and compare it with benchmark data. This comparison allows us to assess how our dataset aligns with established benchmarks and understand any deviations or unique characteristics present. For the benchmark dataset, we have randomly selected 36000 interactions to match the number of interactions with our data and provided a fair comparison. <br>
 <br>
