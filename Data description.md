@@ -1,6 +1,6 @@
 # 1. Data Description
 
-## 1.1. Overview
+## Overview
 
 The number of users, items and interactions for each collection used for the experiment.
 | collection | users | items | interactions |
@@ -12,7 +12,7 @@ The number of users, items and interactions for each collection used for the exp
 
 
 
-## 1.2. Evaluating Data Density and Transaction Thresholds
+## Evaluating Data Density and Transaction Thresholds
 
 We explore our dataset by evaluating its data density and transaction thresholds as determining the optimal transaction threshold is one of the critical steps in designing effective recommender systems. Below analyses were done with complete set of transactions.
 
