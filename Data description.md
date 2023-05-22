@@ -79,7 +79,7 @@ Power law distributions provide insights into the relative popularity and concen
 The distribution for our datasets shows a weaker power law distribution compared to a benchmark dataset, suggesting that the popularity of items in our dataset is more evenly distributed. This could potentially make the task of recommendation more challenging if relying solely on the collaborative filtering method. In a context where popularity serves as a straightforward and effective indicator for recommendations, it becomes less informative in our dataset due to this more evenly distributed popularity.<br>
 <br>
 
-<!-- 
+
 ## 1.4. Token price movement
 
 In order to incorporate price movement labels (binary: 1 for upward movement, 0 for downward movement) for multi-task learning, we have conducted an examination of the price movements for each token. The columns in the table represent the following: the number of tokens for which the latest transaction price is greater than the initial transaction price, the number of tokens for which the latest transaction price is greater than the mean of the remaining transaction prices (excluding the last one), and the number of tokens for which the mean of the second half of the transaction prices is greater than the mean of the first half of the transaction prices. In the table, each row represents a specific token, and the values indicate the percentage of tokens that exhibit the respective price movements.<br>
@@ -91,10 +91,9 @@ In order to incorporate price movement labels (binary: 1 for upward movement, 0 
 | BAYC       | 59%                         | 61%       | 59% |
 | Cool Cats  | 47%                         | 47%         | 50% |
 | Doodles    | 58%                          | 48%        | 59% |
-| Meebits    | 45%                          | 45%         |47% | -->
+| Meebits    | 45%                          | 45%         |47% | 
 
-
-<!-- <br> -->
+<br> 
 
 # 2. Side information preparation
 
@@ -120,8 +119,9 @@ The user’s average holding period for purchased tokens can provide insight int
 user’s trading behavior. This feature was calculated in the same manner as the transaction feature of items.
 ### Transaction count
 We use each wallet address’s transaction count to represent how active the user is in the
-NFT market.
+NFT market.<br>
 
+<br>
 ## 2.3. Price movement label
 We generate price movement label to represent the change in the price of a token between two transactions. The purpose of this feature is to classify whether the price of a token is going to increase or not in the next transaction. We calculate the price difference of each token between the current and subsequent transaction and label it 1 for upward movement, 0 for downward movement or any instances where no subsequent transactions are available for comparison. This kind of information can be valuable in predicting user behavior, as users may behave differently based on whether they anticipate a price increase. 
 
