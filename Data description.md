@@ -113,15 +113,20 @@ have sufficient embedding size since there is one average value per each item. S
 
 ## 2.2. User features
 ### Price
-The average purchase price of each user was used to represent the user’s financial capability and willingness to pay for NFTs, calculated in the same manner as the price feature of items.
+The average purchase price of each user was used to represent the user’s financial capability and willingness to pay for NFTs, calculated in the same manner as the price feature of items.<br>
+<br>
+
 ### Transaction frequency
 The user’s average holding period for purchased tokens can provide insight into the
-user’s trading behavior. This feature was calculated in the same manner as the transaction feature of items.
+user’s trading behavior. This feature was calculated in the same manner as the transaction feature of items.<br>
+<br>
+
 ### Transaction count
 We use each wallet address’s transaction count to represent how active the user is in the
 NFT market.<br>
 
 <br>
+
 ## 2.3. Price movement label
 We generate price movement label to represent the change in the price of a token between two transactions. The purpose of this feature is to classify whether the price of a token is going to increase or not in the next transaction. We calculate the price difference of each token between the current and subsequent transaction and label it 1 for upward movement, 0 for downward movement or any instances where no subsequent transactions are available for comparison. This kind of information can be valuable in predicting user behavior, as users may behave differently based on whether they anticipate a price increase. 
 
