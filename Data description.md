@@ -36,14 +36,14 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 - **Number of users left after user threshold**
 <div class="image-container">
-    <img src="assets/user_num.png" alt="Plot" style="width:500px;height:300px;">
+    <img src="assets/user_threshold.png" alt="Plot" style="width:500px;height:300px;">
     
 </div><br>
 <br>
 
 - **Number of items left after item threshold**
 <div class="image-container">
-    <img src="assets/item_num.png" alt="Plot" style="width:500px;height:300px;">
+    <img src="assets/item_threshold.png" alt="Plot" style="width:500px;height:300px;">
 </div><br>
 <br>   
 
