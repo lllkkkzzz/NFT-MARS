@@ -24,7 +24,9 @@ number of hops (𝐿) [1, 2, 3], and regularisation weight [0.1, 0.001]. Best hy
 | Meebits | 2022 | 512 | 0.1 | 1024 | 1 | 0.001 |
 
 <br>
+
 Same optimiser, Adam, was also used for optimisation of `MGAT` model. As for tuning hyperparameters for MGAT, we fix the loss alpha (𝛼) to 0 test and compare the effectiveness of the multi-task learning and learning rate to 0.01. We then select the dimensions (𝑑) of the graph’s final node representation from [128, 512], batch size from [1024, 4096], regularisation weight from [0.1, 0.001], and number of hops (𝐿) from [1, 2, 3]. Best hyperparameter values for MGAT are specified in below table.<br>
+
 <br>
 
 | collection | seed | dimension (𝑑) | batch size | number of hops (𝐿) | regularisation weight |
@@ -35,5 +37,6 @@ Same optimiser, Adam, was also used for optimisation of `MGAT` model. As for tun
 | Meebits | 2024 | 128 | 1024 | 1 | 0.001 |
 
 <br>
+
 `Baseline models`’ hyperparameters were also tuned, in regards to embedding size, learning rate, and dropout ratio. Specific details regarding the optimal hyperparameter values, hyperparameter search range can be found in 'Baseline_models(Others)/hyper' and 'Baseline_models(Others)/hyper_result'.
 
