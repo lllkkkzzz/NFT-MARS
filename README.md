@@ -1,7 +1,9 @@
 # RecSys2023
 
 This is the origin Pytorch implementation of the paper **NFTs to MARS: Multi-modal multi-Attention Recommender System for NFTs**. 
-All experiments were repeated three times, which can be replicated with three different random seeds (2022, 2023, 2024). Details of the data used is discussed at https://anonymous.4open.science/r/RecSys2023-93ED/Data%20description.md and experimental details are available at https://anonymous.4open.science/r/RecSys2023-93ED/Experimental%20Details.md.
+All experiments were repeated three times, which can be replicated with three different random seeds (2022, 2023, 2024).<br>
+<br>
+Details of the data used is discussed at https://anonymous.4open.science/r/RecSys2023-93ED/Data%20description.md and experimental details are available at https://anonymous.4open.science/r/RecSys2023-93ED/Experimental%20Details.md.
 
 
 
