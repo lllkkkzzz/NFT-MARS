@@ -5,7 +5,7 @@ We performed negative sampling to create user-specific pairwise preferences, des
 <br>
 
 ## Baseline models
-OIn our experiments, we compared our proposed `NFT-MARS` model, which uniquely combines a graph-based collaborative filtering (CF) approach with a content-based method incorporating both user and item features, against a range of baseline models. These baseline models consisted of Pop, ItemKNN, BPR, DMF, NeuMF, and LightGCN, which were executed without any side information like user or item features. On the other hand, we also experimented with models like FM, DeepFM, WideDeep, DCN, AutoInt, and MGAT, utilizing side information. The experimentation was carried out using RecBole. The goal of these comparisons is to compare the effectiveness of different methods in the context of our task.<br>
+In our experiments, we compared our proposed `NFT-MARS` model, which uniquely combines a graph-based collaborative filtering (CF) approach with a content-based method incorporating both user and item features, against a range of baseline models. These baseline models consisted of Pop, ItemKNN, BPR, DMF, NeuMF, and LightGCN, which were executed without any side information like user or item features. On the other hand, we also experimented with models like FM, DeepFM, WideDeep, DCN, AutoInt, and MGAT, utilizing side information. The experimentation was carried out using RecBole. The goal of these comparisons is to compare the effectiveness of different methods in the context of our task.<br> Kindly note that for the sake of simplicity, we have only included the AutoInt and LightGCN models in the run.sh file and provided the results and optimal hyperparameters for these two models in the hyper_result folder.
 
 <br>
 
