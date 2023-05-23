@@ -52,11 +52,11 @@ We explore our dataset by evaluating its data density and transaction thresholds
 Power law distributions provide insights into the relative popularity and concentration of tokens in a dataset. To better understand our dataset, we analyze its power law distribution and compare it with that of a benchmark dataset. This comparison helps us understand how closely our dataset aligns with standard expectations, and if there are any unique characteristics. To ensure a fair comparison, we select a random sample of 36,000 interactions from the benchmark dataset, which matches the number of interactions in our dataset. <br>
 <br>
 1. Our dataset
-- Bored Apes Yacht Club <br>
- <img src="assets/bayc.png" alt="Plot" style="width:500px;height:300px;"><br>
+<br>
+ <img src="assets/power_law_for_four_collections.png" alt="Plot" ><br>
 <br>
 
-- Cool cats<br>
+<!-- - Cool cats<br>
 <img src="assets/coolcats.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 
@@ -66,7 +66,7 @@ Power law distributions provide insights into the relative popularity and concen
 
 - Meebits<br>
 <img src="assets/meebits.png" alt="Plot" style="width:500px;height:300px;">
-<br>
+<br> -->
 
 2. Benchmark datasets<br>
 <br>
