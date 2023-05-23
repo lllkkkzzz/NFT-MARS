@@ -35,5 +35,5 @@ Same optimiser, Adam, was also used for optimisation of MGAT model. As for tunin
 | Meebits | 2024 | 128 | 1024 | 1 | 0.001 |
 
 <br>
-Baseline models’ hyperparameters were also tuned, in regards to embedding size, learning rate, and dropout ratio. Specific details like the optimal hyperparameter values, hyperparameter search range are specified in [hyper](Baseline%20models%20(Others)/hyper) folder.
+Baseline models’ hyperparameters were also tuned, in regards to embedding size, learning rate, and dropout ratio. Specific details like the optimal hyperparameter values, hyperparameter search range are specified in [hyper]{Baseline%20models%20(Others)/hyper} and [hyper_result]{Baseline models (Others)/hyper_result}folder.
 
