@@ -5,12 +5,12 @@ We performed negative sampling to create user-specific pairwise preferences, des
 <br>
 
 ## Baseline models
-OIn our experiments, we compared our proposed NFT-MARS model, which uniquely combines a graph-based collaborative filtering (CF) approach with a content-based method incorporating both user and item features, against a range of baseline models. These baseline models consisted of Pop, ItemKNN, BPR, DMF, NeuMF, and LightGCN, which were executed without any side information like user or item features. On the other hand, we also experimented with models like FM, DeepFM, WideDeep, DCN, AutoInt, and MGAT, utilizing side information. The experimentation was carried out using RecBole. The goal of these comparisons is to compare the effectiveness of different methods in the context of our task.<br>
+OIn our experiments, we compared our proposed `NFT-MARS` model, which uniquely combines a graph-based collaborative filtering (CF) approach with a content-based method incorporating both user and item features, against a range of baseline models. These baseline models consisted of Pop, ItemKNN, BPR, DMF, NeuMF, and LightGCN, which were executed without any side information like user or item features. On the other hand, we also experimented with models like FM, DeepFM, WideDeep, DCN, AutoInt, and MGAT, utilizing side information. The experimentation was carried out using RecBole. The goal of these comparisons is to compare the effectiveness of different methods in the context of our task.<br>
 
 <br>
 
 ## Hyperparameter details
-We optimised NFT-MARS using the Adam optimiser, a learning rate of 0.01, and 50 epochs.
+We optimised `NFT-MARS` using the Adam optimiser, a learning rate of 0.01, and 50 epochs.
 Hyperparameter tuning involved a random search using Recall@50 as an indicator, with search ranges including the
 dimensions (𝑑) of the graph’s final node representation [128, 512], loss alpha (𝛼) [0.1, 0.2], batch size [1024, 4096],
 number of hops (𝐿) [1, 2, 3], and regularisation weight [0.1, 0.001]. Best hyperparameter values for NFT-MARS are specified in below table.<br>
