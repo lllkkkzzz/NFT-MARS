@@ -2,6 +2,9 @@
 
 ## 1.1. Overview
 
+In our study, we focus on the four top-ranked ERC-721 based NFT collections, which are Bored Apes Yacht Club(BAYC), Cool Cats, Doodles, Meebits, in terms of market capitalisation as of August 2022 according to DappRadar. We collected content features using OpenSea API and transaction data from Etherscan NFT tracker adn web3.py, covering the entire period between 1st September 2021 and 10th March 2023. Our dataset consists of implicit feedback and considers purchase history as user-item interactions. We implemented a minimum threshold of five interactions for items in our user-item matrices and incorporated item and user features to enhance the predictive power. The data includes 4,604 users, 25,014 items, and 56,981 interactions across all four collections. <br>
+<br>
+
 The number of users, items and interactions for each collection used for the experiment.<br>
 | collection | users | items | interactions |
 |-------|------|------|-------------|
@@ -76,7 +79,7 @@ Power law distributions provide insights into the relative popularity and concen
 <img src="assets/movielens20m.png" alt="Plot" style="width:500px;height:300px;">
 <br>
 
-The distribution for our datasets shows a weaker power law distribution compared to a benchmark dataset, suggesting that the popularity of items in our dataset is more evenly distributed. This could potentially make the task of recommendation more challenging if relying solely on the collaborative filtering method. In a context where popularity serves as a straightforward and effective indicator for recommendations, it becomes less informative in our dataset due to this more evenly distributed popularity.<br>
+The distribution for our datasets shows a weaker power law distribution compared to a benchmark dataset, suggesting that the popularity of items in our dataset is more evenly distributed. This could potentially make the recommendation task more challenging if relying solely on the collaborative filtering method. In a context where popularity serves as a straightforward and effective indicator for recommendations, it becomes less informative in our dataset due to this more evenly distributed popularity.<br>
 <br>
 
 
