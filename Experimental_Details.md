@@ -38,5 +38,5 @@ Same optimiser, Adam, was also used for optimisation of `MGAT` model. As for tun
 
 <br>
 
-`Baseline models`’ hyperparameters were also tuned, in regards to embedding size, learning rate, and dropout ratio. Specific details regarding the optimal hyperparameter values, hyperparameter search range can be found in `Baseline_models(Others)/hyper_result` and `Baseline_models(Others)/hyper`.
+`Baseline models`’ hyperparameters were also tuned, in regards to embedding size, learning rate, and dropout ratio. Specific details regarding the optimal hyperparameter values, hyperparameter search range can be found in `Baseline_models(Others)/hyper_result` and `Baseline_models(Others)/hyper`, respectively.
 
