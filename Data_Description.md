@@ -49,7 +49,8 @@ We explore our dataset by evaluating its data density and transaction thresholds
 
 ## 1.3. Power law distribution
 
-Power law distributions provide insights into the relative popularity and concentration of tokens in a dataset. To better understand our dataset, we analyze its power law distribution and compare it with that of a benchmark dataset. This comparison helps us understand how closely our dataset aligns with standard expectations, and if there are any unique characteristics. To ensure a fair comparison, we select a random sample of 36,000 interactions from the benchmark dataset, which matches the number of interactions in our dataset. <br>
+Power law distributions provide insights into the relative popularity and concentration of tokens in a dataset. To gain a deeper understanding of our dataset, we analyze its power law distribution and compare it to a benchmark dataset. This comparison enables us to gauge the alignment of our dataset with standard patterns and to identify any distinctive characteristics. For a fair comparison, we have selected a random sample of 14,000 interactions from the benchmark dataset, which corresponds to the average number of interactions in our dataset.
+ <br>
 <br>
 1. Our dataset
 <br>
