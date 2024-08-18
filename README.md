@@ -21,7 +21,7 @@ Explore our [Data Description](Data_Description.md) for detailed data informatio
 
 1. Install Python 3.10.9
 
-2. Download data. You can obtain all pre-processed data from [Google Drive](https://drive.google.com/drive/folders/12WeTJ6HzjGI0giirlu__PFSGtxno7cWU?usp=share_link).
+2. Download data. You can obtain all pre-processed data from [Google Drive](https://drive.google.com/drive/folders/1p4DQdyTASICL31APiTNoscsUIQ3_WJhf?usp=sharing).
    
    (For detailed description about the data, please refer to `Our model/Create_dataset.ipynb`)
 
