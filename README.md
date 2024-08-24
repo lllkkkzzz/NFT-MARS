@@ -6,10 +6,7 @@ All experiments were repeated three times, which can be replicated with three di
 <br>
 Explore our [Data Description](Data_Description.md) for detailed data information, and [Experimental Details](Experimental_Details.md) for the detailed experiment settings.
 
-[![arXiv](https://img.shields.io/badge/Arxiv-2407.12330-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2407.12330)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmijoo308%2FEnergy-Calibration&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
-
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyoungandbin%2FNFT-MARS%2Ftree%2Fmain&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 ![model](assets/figure_model_architecture.png)
 
