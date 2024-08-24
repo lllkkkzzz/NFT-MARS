@@ -54,7 +54,7 @@ Explore our [Data Description](Data_Description.md) for detailed data informatio
   2. **Multi-modal attention** to incorporate user-specific feature preferences
   3. **Multi-task learning** to address the dual nature of NFTs as artworks and investment assets
 - We demonstrate the effectiveness of our model compared to various baseline models using the actual transaction data of NFTs collected directly from blockchain for four of the most popular NFT collections.
-- We constructed a dataset by combining this transaction data with hand-crafted features, which can be used as a benchmark dataset for any NFT recommendation model. Datasets are available on [Google Drive](https://drive.google.com/drive/folders/12WeTJ6HzjGI0giirlu__PFSGtxno7cWU?usp=share_link).
+- We constructed a dataset by combining this transaction data with hand-crafted features, which can be used as a benchmark dataset for any NFT recommendation model. Datasets are available on [Google Drive](https://drive.google.com/drive/folders/1p4DQdyTASICL31APiTNoscsUIQ3_WJhf?usp=sharing).
 
 ## Baselines
 
