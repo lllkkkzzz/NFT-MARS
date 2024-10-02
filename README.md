@@ -1,6 +1,6 @@
 # NFTs-to-MARS
 
- > Official implementation of "**Multi-attention recommender system for non-fungible tokens**" ([Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/journal/engineering-applications-of-artificial-intelligence))"
+ > Official implementation of "**[Multi-attention recommender system for non-fungible tokens](https://www.sciencedirect.com/science/article/abs/pii/S095219762401337X)**" ([Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/journal/engineering-applications-of-artificial-intelligence))"
 
 All experiments were repeated three times, which can be replicated with three different random seeds (2022, 2023, 2024).<br>
 <br>
