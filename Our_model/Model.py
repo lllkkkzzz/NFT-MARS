@@ -9,9 +9,9 @@ from torch_geometric.nn import GCNConv
 
 from GraphGAT import GraphGAT  
 
-class MGAT(torch.nn.Module):
+class NFT_MARS(torch.nn.Module):
     def __init__(self, features, user_features, edge_index, batch_size, num_user, num_item, reg_parm, dim_x, DROPOUT, hop, path=None):
-        super(MGAT, self).__init__()
+        super(NFT_MARS, self).__init__()
         self.batch_size = batch_size
         self.num_user = num_user
         self.num_item = num_item
@@ -30,10 +30,10 @@ class MGAT(torch.nn.Module):
 
         self.user_features = torch.tensor(user_features, dtype=torch.float).cuda()
 
-        self.v_gnn = GAT(self.v_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=1024
-        self.t_gnn = GAT(self.t_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=1500
-        self.p_gnn = GAT(self.p_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=64
-        self.tr_gnn = GAT(self.tr_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=64
+        self.v_gnn = GAT(self.v_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        self.t_gnn = GAT(self.t_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        self.p_gnn = GAT(self.p_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        self.tr_gnn = GAT(self.tr_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
 
         self.id_embedding = nn.Embedding(num_user+num_item, dim_x)
         nn.init.xavier_normal_(self.id_embedding.weight)
@@ -41,9 +41,9 @@ class MGAT(torch.nn.Module):
 
         # linear layers
         self.MLP_price = MLP_price(dim_in=dim_x*2*hop, dim_out=1)
-        # self.q_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
-        # self.k_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
-        # self.v_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.q_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.k_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.v_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
 
 
     def forward(self, user_nodes, pos_items, neg_items): # torch.Size([2048])   
@@ -62,6 +62,28 @@ class MGAT(torch.nn.Module):
         user_tensor = representation[user_nodes]
         pos_tensor = representation[pos_items]
         neg_tensor = representation[neg_items]
+
+        # QUERY
+        Q = user_tensor # torch.Size([batch_size, dim_x])
+        # KEY, VALUE
+        pos_tensor_v = v_rep[pos_items]
+        pos_tensor_t = t_rep[pos_items]
+        pos_tensor_p = p_rep[pos_items]
+        pos_tensor_tr = tr_rep[pos_items] # torch.Size([batch_size, dim_x]) 
+        # create a matrix where each row is the average of pos_tensor_v, pos_tensor_t, pos_tensor_p, pos_tensor_tr
+        K = torch.stack([pos_tensor_v.mean(dim=0), pos_tensor_t.mean(dim=0), pos_tensor_p.mean(dim=0), pos_tensor_tr.mean(dim=0)], dim=0)
+        V = K.clone() # torch.Size([4, dim_x])
+
+        # transform
+        Q = self.q_fc(Q) # torch.Size([batch_size, dim_x])
+        K = self.k_fc(K) # torch.Size([4, dim_x])
+        V = self.v_fc(V)
+
+        # calculate attention
+        attention = torch.matmul(Q, K.transpose(1, 0)) / np.sqrt(K.shape[1]) # torch.Size([batch_size, 4])
+        attention = F.softmax(attention, dim=1)
+        attention = torch.matmul(attention, V) # torch.Size([batch_size, dim_x])
+        user_tensor = attention
         
         # 1) BPR pred
         pos_scores = torch.sum(user_tensor * pos_tensor, dim=1) # torch.Size([batch_size])
@@ -137,6 +159,37 @@ class MGAT(torch.nn.Module):
 
         return recall_list/num_user, ndcg_list/num_user
 
+    def attention_score(self, dataset):
+        attention_score = {}
+        for data in dataset:
+
+            user = data[0]
+            pos_items = data[1]
+
+            v_rep = self.v_representation
+            t_rep = self.t_representation
+            p_rep = self.p_representation 
+            tr_rep = self.tr_representation 
+
+            Q = self.result_embed[user]
+
+            pos_tensor_v = v_rep[pos_items]
+            pos_tensor_t = t_rep[pos_items]
+            pos_tensor_p = p_rep[pos_items]
+            pos_tensor_tr = tr_rep[pos_items]
+
+            K = torch.stack([pos_tensor_v, pos_tensor_t, pos_tensor_p, pos_tensor_tr], dim=0)
+            V = K.clone()
+
+            Q = self.q_fc(Q) # torch.Size([2048, 512])
+            K = self.k_fc(K) # torch.Size([4, 512])
+            V = self.v_fc(V) # torch.Size([4, 512])
+
+            attention = torch.matmul(Q, K.transpose(1, 0)) / np.sqrt(K.shape[1])
+            attention_score[user] = attention.tolist()
+
+        return attention_score
+
 
 class GAT(torch.nn.Module):
     def __init__(self, features, user_features, edge_index, batch_size, num_user, num_item, dim_id, DROPOUT, hop, dim_latent=None):
@@ -152,14 +205,14 @@ class GAT(torch.nn.Module):
         self.dim_latent = dim_latent
         self.hop = hop
 
-        self.dim_feat = features.size(1)   # the size of the second dimension of the tensor, which corresponds to the number of features in each item.
-        self.user_dim_feat = user_features.size(1)   # the size of the second dimension of the tensor, which corresponds to the number of features in each user
+        self.dim_feat = features.size(1)
+        self.user_dim_feat = user_features.size(1)
 
         # self.preference = nn.Embedding(num_user, self.dim_latent)
         # nn.init.xavier_normal_(self.preference.weight).cuda()
 
         # self.MLP = nn.Linear(self.dim_feat, self.dim_latent)
-        self.user_MLP = nn.Linear(self.user_dim_feat, self.dim_feat)
+        self.user_MLP = nn.Linear(self.user_dim_feat, self.dim_feat) # to match the dimensionality of the item features
 
         if self.dim_latent:
             self.conv_embed_1 = GraphGAT(self.dim_latent, self.dim_latent, self.DROPOUT, aggr='add')
@@ -250,7 +303,7 @@ class GAT(torch.nn.Module):
 
         item_features = nn.Embedding.from_pretrained(self.features, freeze=True).weight           # dim_feat
         user_features = torch.tanh(self.user_MLP(self.user_features))                             # user_dim_feat -> dim_feat
-        
+
         x = torch.cat((item_features, user_features), dim=0) 
         x = F.normalize(x).cuda()
 
@@ -335,3 +388,4 @@ class MLP_price(torch.nn.Module):
         x = self.linear_layer2(x)
 
         return x
+

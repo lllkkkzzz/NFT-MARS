@@ -12,7 +12,8 @@ from torchcontrib.optim import SWA
 import wandb
 
 from DataLoad import DataLoad
-from Model_MGAT import MGAT
+from Model import NFT_MARS
+from Model_ablation import MO
 
 class Net:
     def __init__(self, args):
@@ -37,7 +38,9 @@ class Net:
         self.number = args.number
         self.attention_dropout = args.attention_dropout
         self.SWA = args.SWA
-        self.device = "cuda:0"
+
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
         self.patience = args.num_epoch # for early stopping
         self.hop = args.hop
 
@@ -45,7 +48,7 @@ class Net:
         self.data_path = os.path.join(self.data_path, self.collection)
         os.makedirs(self.data_path, exist_ok=True)
 
-        # save_path: 'saved/MGAT/bayc'
+        # save_path: 'saved/NFT_MARS/bayc'
         self.save_path = os.path.join(self.PATH_weight_save, self.model_name, self.collection)
         os.makedirs(self.save_path, exist_ok=True)
 
@@ -78,18 +81,38 @@ class Net:
 
         ###################################### Load model ######################################
         print('Loading model  ...')
-        if self.model_name == 'MGAT':
+        if self.model_name == 'NFT_MARS':
             self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
-            self.model = MGAT(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+            self.model = NFT_MARS(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
                                self.reg_parm, self.dim_x, self.attention_dropout, self.hop, self.data_path).cuda()
-
+        elif self.model_name == 'MO_v':
+            self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
+            self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+                            self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 'v', self.data_path).cuda()
+        elif self.model_name == 'MO_t':
+            self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
+            self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+                            self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 't', self.data_path).cuda()
+        elif self.model_name == 'MO_p':
+            self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
+            self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+                            self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 'p', self.data_path).cuda()
+        elif self.model_name == 'MO_tr':
+            self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
+            self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+                            self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 'tr', self.data_path).cuda()
+        elif self.model_name == 'MO_all':
+            self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
+            self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
+                            self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 'all', self.data_path).cuda()
+            
         # Optimizer
         self.optimizer = torch.optim.Adam([{'params': self.model.parameters(), 'lr': self.l_r}],
                                             weight_decay=self.weight_decay)
         if self.SWA == True:
             self.optimizer = SWA(self.optimizer, swa_start=5, swa_freq=3, swa_lr=0.001)
             self.optimizer.defaults=self.optimizer.optimizer.defaults
- 
+        
         # Load model
         if self.PATH_weight_load and os.path.exists(self.PATH_weight_load):
             self.model.load_state_dict(torch.load(self.PATH_weight_load))
@@ -129,7 +152,7 @@ class Net:
             loss_BPR_avg = loss_BPR_batch.item() / self.batch_size
             loss_Price_avg = loss_Price_batch.item() / self.batch_size
 
-            ###################################### Evaluate ######################################
+            ###################################### Evaluate ###################################
             self.model.eval()
             with torch.no_grad():
                 # Valid
@@ -150,7 +173,7 @@ class Net:
                 if patience_count >= self.patience:
                     break
             
-            ###################################### save Epoch ######################################
+            ###################################### save Epoch #################################
             print(
                 '{0}-th Loss:{1:.4f}, BPR:{2:.4f} Price: {3:.4f} / Recall:{4:.4f} NDCG:{5:.4f} / Best Recall:{6:.4f}'.format(
                     epoch, loss_avg, loss_BPR_avg, loss_Price_avg, 
@@ -172,7 +195,7 @@ class Net:
                      'recall_test_top40': total_recall_test[3], 'ndcg_test_top40': total_ndcg_test[3],
                      'recall_test_top50': total_recall_test[4], 'ndcg_test_top50': total_ndcg_test[4],
                      }
-            wandb.log(epoch)
+            wandb.log(epoch) # log epoch to wandb
 
 
 if __name__ == '__main__':
@@ -184,14 +207,14 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--no-cuda', action='store_true', default=False, help='Disables CUDA training.')
-    parser.add_argument('--model_name', default='MGAT', help='Model name.')
+    parser.add_argument('--model_name', default='NFT_MARS', help='Model name.')
     parser.add_argument('--collection', default='bayc', help='Collection name.')
     parser.add_argument('--data_path', default='dataset/collections', help='Dataset path')
     parser.add_argument('--PATH_weight_load', default=None, help='Loading weight filename.')
     parser.add_argument('--PATH_weight_save', default='saved', help='Writing weight filename.')
     parser.add_argument('--l_r', type=float, default=1e-4, help='Learning rate.')
     parser.add_argument('--weight_decay', type=float, default=0, help='Weight decay.')
-    parser.add_argument('--batch_size', type=int, default=512, help='Batch size.')
+    parser.add_argument('--batch_size', type=int, default=2048, help='Batch size.')
     parser.add_argument('--dim_x', type=int, default=64, help='embedding dimension')
     parser.add_argument('--num_epoch', type=int, default=200, help='Epoch number')
     parser.add_argument('--num_workers', type=int, default=0, help='Workers number')
@@ -207,7 +230,7 @@ if __name__ == '__main__':
     parser.add_argument('--project', default='project', help='the name of project')
     args = parser.parse_args()
 
-    MGAT = Net(args)
+    NFT_MARS = Net(args)
     wandb.init(project="YOUR_PROJECT", name=f'{args.collection}_{args.loss_alpha}', entity="YOUR_ENTITY", config={k: v for k, v in args._get_kwargs()})
-    MGAT.run()
+    NFT_MARS.run()
     wandb.finish()
