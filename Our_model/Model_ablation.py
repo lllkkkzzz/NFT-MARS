@@ -9,9 +9,9 @@ from torch_geometric.nn import GCNConv
 
 from GraphGAT import GraphGAT  
 
-class MGAT(torch.nn.Module):
-    def __init__(self, features, user_features, edge_index, batch_size, num_user, num_item, reg_parm, dim_x, DROPOUT, hop, path=None):
-        super(MGAT, self).__init__()
+class MO(torch.nn.Module):
+    def __init__(self, features, user_features, edge_index, batch_size, num_user, num_item, reg_parm, dim_x, DROPOUT, hop, what_feature='v', path=None):
+        super(MO, self).__init__()
         self.batch_size = batch_size
         self.num_user = num_user
         self.num_item = num_item
@@ -21,19 +21,30 @@ class MGAT(torch.nn.Module):
         self.edge_index = edge_index[:,:2]
         self.edge_index = torch.tensor(self.edge_index).t().contiguous().cuda()
         self.edge_index = torch.cat((self.edge_index, self.edge_index[[1,0]]), dim=1)
+        self.what_feature = what_feature
+        
+        self.user_features = torch.tensor(user_features, dtype=torch.float).cuda()
         
         v_feat, t_feat, p_feat, tr_feat = features
-        self.v_feat = torch.tensor(v_feat, dtype=torch.float).cuda()
-        self.t_feat = torch.tensor(t_feat, dtype=torch.float).cuda()
-        self.p_feat = torch.tensor(p_feat, dtype=torch.float).cuda()
-        self.tr_feat = torch.tensor(tr_feat, dtype=torch.float).cuda()
-
-        self.user_features = torch.tensor(user_features, dtype=torch.float).cuda()
-
-        self.v_gnn = GAT(self.v_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=1024
-        self.t_gnn = GAT(self.t_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=1500
-        self.p_gnn = GAT(self.p_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=64
-        self.tr_gnn = GAT(self.tr_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) # dim_latent=64
+        if what_feature == 'v':  
+            self.v_feat = torch.tensor(v_feat, dtype=torch.float).cuda()
+            self.v_gnn = GAT(self.v_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        elif what_feature == 't':
+            self.t_feat = torch.tensor(t_feat, dtype=torch.float).cuda()
+            self.t_gnn = GAT(self.t_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        elif what_feature == 'p':   
+            self.p_feat = torch.tensor(p_feat, dtype=torch.float).cuda()
+            self.p_gnn = GAT(self.p_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        elif what_feature == 'tr':
+            self.tr_feat = torch.tensor(tr_feat, dtype=torch.float).cuda()
+            self.tr_gnn = GAT(self.tr_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
+        elif what_feature == 'all':
+            self.v_feat = torch.tensor(v_feat, dtype=torch.float).cuda()
+            self.t_feat = torch.tensor(t_feat, dtype=torch.float).cuda()
+            self.p_feat = torch.tensor(p_feat, dtype=torch.float).cuda()
+            self.tr_feat = torch.tensor(tr_feat, dtype=torch.float).cuda()
+            self.total_feat = torch.cat((self.v_feat, self.t_feat, self.p_feat, self.tr_feat), dim=1)
+            self.gnn = GAT(self.total_feat, self.user_features, self.edge_index, batch_size, num_user, num_item, dim_x, DROPOUT, hop, dim_latent=None) 
 
         self.id_embedding = nn.Embedding(num_user+num_item, dim_x)
         nn.init.xavier_normal_(self.id_embedding.weight)
@@ -41,23 +52,30 @@ class MGAT(torch.nn.Module):
 
         # linear layers
         self.MLP_price = MLP_price(dim_in=dim_x*2*hop, dim_out=1)
-        # self.q_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
-        # self.k_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
-        # self.v_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.q_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.k_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
+        self.v_fc = nn.Linear(dim_x*hop, dim_x*hop, bias=False) # (d_model, d_model)
 
 
     def forward(self, user_nodes, pos_items, neg_items): # torch.Size([2048])   
-          
-        v_rep = self.v_gnn(self.id_embedding) 
-        t_rep = self.t_gnn(self.id_embedding) 
-        p_rep = self.p_gnn(self.id_embedding) 
-        tr_rep = self.tr_gnn(self.id_embedding) # torch.Size([num_user+num_item, dim_x])
-        self.v_representation = v_rep
-        self.t_representation = t_rep
-        self.p_representation = p_rep
-        self.tr_representation = tr_rep
-
-        representation = (v_rep + t_rep + p_rep + tr_rep)/4 # torch.Size([num_user+num_item, dim_x]) # fusion
+        
+        if self.what_feature == 'v':
+            v_rep = self.v_gnn(self.id_embedding) 
+            self.representation = v_rep
+        elif self.what_feature == 't':
+            t_rep = self.t_gnn(self.id_embedding) 
+            self.representation = t_rep
+        elif self.what_feature == 'p':
+            p_rep = self.p_gnn(self.id_embedding) 
+            self.representation = p_rep
+        elif self.what_feature == 'tr':
+            tr_rep = self.tr_gnn(self.id_embedding) # torch.Size([num_user+num_item, dim_x])
+            self.representation = tr_rep
+        elif self.what_feature == 'all':
+            total_rep = self.gnn(self.id_embedding) 
+            self.representation = total_rep
+    
+        representation = self.representation # torch.Size([num_user+num_item, dim_x]) # fusion
         self.result_embed = representation
         user_tensor = representation[user_nodes]
         pos_tensor = representation[pos_items]
@@ -152,14 +170,14 @@ class GAT(torch.nn.Module):
         self.dim_latent = dim_latent
         self.hop = hop
 
-        self.dim_feat = features.size(1)   # the size of the second dimension of the tensor, which corresponds to the number of features in each item.
-        self.user_dim_feat = user_features.size(1)   # the size of the second dimension of the tensor, which corresponds to the number of features in each user
+        self.dim_feat = features.size(1)
+        self.user_dim_feat = user_features.size(1)
 
         # self.preference = nn.Embedding(num_user, self.dim_latent)
         # nn.init.xavier_normal_(self.preference.weight).cuda()
 
-        # self.MLP = nn.Linear(self.dim_feat, self.dim_latent)
-        self.user_MLP = nn.Linear(self.user_dim_feat, self.dim_feat)
+        # self.MLP = nn.Linear(self.dim_feat, self.dim_latent) 
+        self.user_MLP = nn.Linear(self.user_dim_feat, self.dim_feat) # to match the dimensionality of the item features
 
         if self.dim_latent:
             self.conv_embed_1 = GraphGAT(self.dim_latent, self.dim_latent, self.DROPOUT, aggr='add')
@@ -250,7 +268,7 @@ class GAT(torch.nn.Module):
 
         item_features = nn.Embedding.from_pretrained(self.features, freeze=True).weight           # dim_feat
         user_features = torch.tanh(self.user_MLP(self.user_features))                             # user_dim_feat -> dim_feat
-        
+
         x = torch.cat((item_features, user_features), dim=0) 
         x = F.normalize(x).cuda()
 
@@ -335,3 +353,4 @@ class MLP_price(torch.nn.Module):
         x = self.linear_layer2(x)
 
         return x
+
