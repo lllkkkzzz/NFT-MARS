@@ -9,11 +9,14 @@ import pickle
 import matplotlib.pyplot as plt
 import random
 from torchcontrib.optim import SWA
-import wandb
+import logging
 
 from DataLoad import DataLoad
 from Model import NFT_MARS
 from Model_ablation import MO
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class Net:
     def __init__(self, args):
@@ -53,14 +56,14 @@ class Net:
         os.makedirs(self.save_path, exist_ok=True)
 
         ###################################### Load dataset ######################################
-        print('Loading dataset  ...')
+        logging.info('Loading dataset  ...')
         num_user_item = np.load(os.path.join(self.data_path, 'num_user_item.npy'), allow_pickle=True).item()
         self.num_item = num_user_item['num_item']
         self.num_user = num_user_item['num_user']
-        print(f"num_user: {self.num_user}, num_item: {self.num_item}")
+        logging.info(f"num_user: {self.num_user}, num_item: {self.num_item}")
 
         self.train_dataset = DataLoad(self.data_path, self.num_user, self.num_item, 0)
-        for i in range(1, self.neg_sample+1): 
+        for i in range(1, self.neg_sample+1):
             self.train_dataset += DataLoad(self.data_path, self.num_user, self.num_item, i)
         self.train_dataloader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True,
                                            num_workers=self.num_workers)
@@ -80,7 +83,7 @@ class Net:
         self.indices_test = np.load(os.path.join(self.data_path, 'indices_test.npy'), allow_pickle=True)
 
         ###################################### Load model ######################################
-        print('Loading model  ...')
+        logging.info('Loading model  ...')
         if self.model_name == 'NFT_MARS':
             self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
             self.model = NFT_MARS(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
@@ -105,18 +108,18 @@ class Net:
             self.features = [self.v_feat, self.t_feat, self.p_feat, self.tr_feat]
             self.model = MO(self.features, self.user_feat, self.edge_index, self.batch_size, self.num_user, self.num_item,
                             self.reg_parm, self.dim_x, self.attention_dropout, self.hop, 'all', self.data_path).cuda()
-            
+
         # Optimizer
         self.optimizer = torch.optim.Adam([{'params': self.model.parameters(), 'lr': self.l_r}],
                                             weight_decay=self.weight_decay)
         if self.SWA == True:
             self.optimizer = SWA(self.optimizer, swa_start=5, swa_freq=3, swa_lr=0.001)
             self.optimizer.defaults=self.optimizer.optimizer.defaults
-        
+
         # Load model
         if self.PATH_weight_load and os.path.exists(self.PATH_weight_load):
             self.model.load_state_dict(torch.load(self.PATH_weight_load))
-            print('module weights loaded....')
+            logging.info('module weights loaded....')
 
 
     def run(self):
@@ -127,7 +130,7 @@ class Net:
 
         best_recall, best_ndcg = 0.0, 0.0
 
-        print(f'{self.collection}: Start training ...')
+        logging.info(f'{self.collection}: Start training ...')
         patience_count = 0
         for epoch in range(self.num_epoch):
 
@@ -163,7 +166,7 @@ class Net:
                 recall_test, ndcg_test = total_recall_test[-1], total_ndcg_test[-1] # top50 only
 
             # Save best model
-            if recall > best_recall: 
+            if recall > best_recall:
                 best_recall = recall
                 path = os.path.join(self.save_path, f'{self.number}_model.pt')
                 torch.save(self.model.state_dict(), path)
@@ -172,30 +175,31 @@ class Net:
                 patience_count += 1
                 if patience_count >= self.patience:
                     break
-            
+
             ###################################### save Epoch #################################
-            print(
+            logging.info(
                 '{0}-th Loss:{1:.4f}, BPR:{2:.4f} Price: {3:.4f} / Recall:{4:.4f} NDCG:{5:.4f} / Best Recall:{6:.4f}'.format(
-                    epoch, loss_avg, loss_BPR_avg, loss_Price_avg, 
-                    recall, ndcg, 
+                    epoch, loss_avg, loss_BPR_avg, loss_Price_avg,
+                    recall, ndcg,
                     best_recall
                     ))
 
-            epoch = {'loss':loss_avg, 'loss_BPR': loss_BPR_avg, 'loss_Price': loss_Price_avg, 
-                     'recall': recall, 'ndcg': ndcg, # top50
-                     'recall_test': recall_test, 'ndcg_test': ndcg_test, # top50
-                     'recall_top10': total_recall[0], 'ndcg_top10': total_ndcg[0],
-                     'recall_top20': total_recall[1], 'ndcg_top20': total_ndcg[1],
-                     'recall_top30': total_recall[2], 'ndcg_top30': total_ndcg[2],
-                     'recall_top40': total_recall[3], 'ndcg_top40': total_ndcg[3],
-                     'recall_top50': total_recall[4], 'ndcg_top50': total_ndcg[4],
-                     'recall_test_top10': total_recall_test[0], 'ndcg_test_top10': total_ndcg_test[0],
-                     'recall_test_top20': total_recall_test[1], 'ndcg_test_top20': total_ndcg_test[1],
-                     'recall_test_top30': total_recall_test[2], 'ndcg_test_top30': total_ndcg_test[2],
-                     'recall_test_top40': total_recall_test[3], 'ndcg_test_top40': total_ndcg_test[3],
-                     'recall_test_top50': total_recall_test[4], 'ndcg_test_top50': total_ndcg_test[4],
-                     }
-            wandb.log(epoch) # log epoch to wandb
+            epoch_metrics = {
+                'loss': loss_avg, 'loss_BPR': loss_BPR_avg, 'loss_Price': loss_Price_avg,
+                'recall': recall, 'ndcg': ndcg, # top50
+                'recall_test': recall_test, 'ndcg_test': ndcg_test, # top50
+                'recall_top10': total_recall[0], 'ndcg_top10': total_ndcg[0],
+                'recall_top20': total_recall[1], 'ndcg_top20': total_ndcg[1],
+                'recall_top30': total_recall[2], 'ndcg_top30': total_ndcg[2],
+                'recall_top40': total_recall[3], 'ndcg_top40': total_ndcg[3],
+                'recall_top50': total_recall[4], 'ndcg_top50': total_ndcg[4],
+                'recall_test_top10': total_recall_test[0], 'ndcg_test_top10': total_ndcg_test[0],
+                'recall_test_top20': total_recall_test[1], 'ndcg_test_top20': total_ndcg_test[1],
+                'recall_test_top30': total_recall_test[2], 'ndcg_test_top30': total_ndcg_test[2],
+                'recall_tStart training est_top40': total_recall_test[3], 'ndcg_test_top40': total_ndcg_test[3],
+                'recall_test_top50': total_recall_test[4], 'ndcg_test_top50': total_ndcg_test[4],
+            }
+            logging.info(f'Epoch {epoch} metrics: {epoch_metrics}')
 
 
 if __name__ == '__main__':
@@ -231,6 +235,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     NFT_MARS = Net(args)
-    wandb.init(project="YOUR_PROJECT", name=f'{args.collection}_{args.loss_alpha}', entity="YOUR_ENTITY", config={k: v for k, v in args._get_kwargs()})
     NFT_MARS.run()
-    wandb.finish()
